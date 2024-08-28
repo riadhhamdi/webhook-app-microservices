@@ -14,19 +14,16 @@
     </script>
 </head>
 <body onload="autoRefreshPage()">
-    <div class="header">
-        <h1>Webhook Dashboard</h1>
-    </div>
     <div class="container">
+        <h1>Received Webhooks</h1>
         {% if webhooks %}
-            {% for index, webhook in enumerate(webhooks) %}
-                <div class="webhook-container {{ 'odd' if loop.index0 % 2 == 0 else 'even' }}">
-                    <h3>Webhook {{ loop.index }}</h3>
-                    <pre>{{ webhook | tojson(indent=2) }}</pre>
-                </div>
-            {% endfor %}
+            <ul>
+                {% for webhook in webhooks %}
+                    <li><pre>{{ webhook | tojson(indent=2) }}</pre></li>
+                {% endfor %}
+            </ul>
         {% else %}
-            <p class="no-webhooks">No webhooks received yet.</p>
+            <p>No webhooks received yet.</p>
         {% endif %}
     </div>
 </body>
