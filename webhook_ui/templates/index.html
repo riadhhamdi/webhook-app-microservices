@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Received Webhooks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function autoRefreshPage() {
+            setTimeout(function(){
+                location.reload();
+            }, 5000);
+        }
+    </script>
+</head>
+<body onload="autoRefreshPage()">
+    <div class="header">
+        <h1>Webhook Dashboard</h1>
+    </div>
+    <div class="container">
+        {% if webhooks %}
+            {% for index, webhook in enumerate(webhooks) %}
+                <div class="webhook-container {{ 'odd' if loop.index0 % 2 == 0 else 'even' }}">
+                    <h3>Webhook {{ loop.index }}</h3>
+                    <pre>{{ webhook | tojson(indent=2) }}</pre>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-webhooks">No webhooks received yet.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

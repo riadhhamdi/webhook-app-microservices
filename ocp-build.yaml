@@ -1,0 +1,33 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: webhook-backend-build
+spec:
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/riadhhamdi/webhook-app-microservices.git'
+    contextDir: webhook_backend
+  strategy:
+    type: Docker
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'webhook-backend:latest'
+---
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: webhook-frontend-build
+spec:
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/riadhhamdi/webhook-app-microservices.git'
+    contextDir: webhook_ui
+  strategy:
+    type: Docker
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'webhook-frontend:latest'
