@@ -41,7 +41,7 @@ $ podman run -d -p 5001:5001 --name frontend-service -e BACKEND_URL="http://back
 ```bash
 $ oc new-app --name webhook-backend --context-dir webhook_backend https://github.com/riadhhamdi/webhook-app-microservices.git  
 $ oc delete svc/webhook-backend
-$ oc expose deploy/webhook-backend
+$ oc expose deploy/webhook-backend --port 5000
 $ oc expose svc/webhook-backend
 ```
 * deploy the frontend 
@@ -53,7 +53,7 @@ $ oc new-app --name webhook-frontend --context-dir webhook_ui https://github.com
 ## $ oc new-app --name webhook-frontend --context-dir webhook_ui https://github.com/riadhhamdi/webhook-app-microservices.git -e BACKEND_URL=http://webhook-backend.hooks.svc.cluster.local:5000/webhooks
  
 $ oc delete svc/webhook-frontend
-$ oc expose deploy/webhook-frontend
+$ oc expose deploy/webhook-frontend --port 5001
 $ oc expose svc/webhook-frontend
 ```
 
